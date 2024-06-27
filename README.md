@@ -18,4 +18,4 @@ If you reeeaaallllly want to, you can pain-stakingly modify it to do things like
 You can do anything with Source Code if you have patience and time ... an ungodly amount of free time. But that's what I call the 'Power of Unemployment'!
 
 ### Also Also
-Was thinking about making a website to be able to play without extensions or Developer Mode, but the ```staticmax``` folder has 1802 FUCKING FILES, plus I think there is a extension-only component baked into this, so that's not happening anytime soon (by me)
+Was thinking about making a website to be able to play without extensions or Developer Mode, but the ```staticmax``` folder has 1802 FUCKING FILES, plus I think there is a extension-only component baked into this, so that's not happening anytime soon (by me, because again, The POWER OF UNEMPLOYMENT!)
