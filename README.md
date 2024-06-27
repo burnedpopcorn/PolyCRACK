@@ -11,3 +11,6 @@ A Re-Upload of PolyCraft 1.0.0.25
 > DO NOT click into the folder or anything inside, just select solely the folder
 
 After that, it should be installed and can be accessed by opening the App Drawer and Opening the PolyCraft App
+
+### Also "Source Code" Above
+If you reeeaaallllly want to, you can pain-stakingly modify it to do things like remove ga.me and micro-transactions, or maybe even replace the micro-transactions screen with a cheats screen i guess. You can do anything with Source Code if you have patience and time ... an ungodly amount of free time. But that's what I call the 'Power of Unemployment'!
