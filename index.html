@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-csp="" ng-app="game.host">
+<head>
+    <script src="js/lib/jquery-1.10.2.js"></script>
+    <script src="js/lib/angular.js"></script>
+    <script src="js/lib/angular-route.js"></script>
+    <script src="js/lib/lodash.js"></script>
+    <script src="js/lib/socket.io.js"></script>
+    <script src="js/lib/googlewallet-buy.js"></script>
+    <script src="js/app/app.js"></script>
+    <script src="js/app/oauth.js"></script>
+    <script src="js/app/external.js"></script>
+    <script src="js/app/socket.js"></script>
+    <script src="js/app/message.js"></script>
+    <script src="js/app/bridge.js"></script>
+    <script src="js/app/eventbroadcaster.js"></script>
+    <script src="js/app/gamemodes.js"></script>
+    <script src="js/app/gamecanvas.js"></script>
+    <script src="js/app/config.js"></script>
+    <script src="js/app/online.js"></script>
+    <script src="js/app/bridgeservices.js"></script>
+    <script src="js/app/badgeservice.js"></script>
+    <script src="js/app/leaderboardservice.js"></script>
+    <script src="js/app/gamesessionservice.js"></script>
+    <script src="js/app/userdataservice.js"></script>
+    <script src="js/app/storeservice.js"></script>
+    <script src="js/app/utils.js"></script>
+    <script src="js/app/localstorage.js"></script>
+    <script src="js/app/sync.js"></script>
+    <script src="js/app/tzmodal.js"></script>
+    <script src="js/app/paymentwindow.js"></script>
+    <script src="js/app/currencies.js"></script>
+    <script src="js/app/basket.js"></script>
+
+    <link rel="stylesheet" href="js/app/app.css"/>
+    <link rel="stylesheet" href="js/lib/angular-csp.css"/>
+</head>
+<body>
+    <div class="background">
+        <ng-view class="app"></ng-view>
+    </div>
+
+    <div ng-include="'/js/app/basket.partial.html'"></div>
+
+    <webview id="login-webview" partition="persist:cookieshare"></webview>
+
+</body>
+</html>
