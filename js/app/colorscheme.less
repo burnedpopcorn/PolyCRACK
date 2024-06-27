@@ -1,0 +1,151 @@
+@import "colors";
+
+// This CSS is replicated many many times, so anything that can be removed should be removed!
+
+.cs-no-bgcolor
+{
+    background-color: inherit !important;
+}
+.cs-no-bordercolor
+{
+    border-color: inherit !important;
+}
+.cs-no-color
+{
+    color: inherit !important;
+}
+
+.base-scheme(@color) {
+    background-color: @color;
+    border-color: @color;
+    color: @tz-white;
+}
+
+.invert-scheme(@color) {
+    background-color: @tz-white;
+    border-color: @tz-white;
+    color: @color;
+}
+
+.color-scheme(@baseColor) {
+
+    @darkerColor: mix(black, @baseColor, 20%);
+    @darkColor: mix(black, @baseColor, 15%);
+    @midColor: mix(@tz-l-grey, @baseColor, 75%);
+    @lighterColor: mix(white, @baseColor, 30%);
+    @lightestColor: mix(white, @baseColor, 80%);
+
+    // Apply the base scheme
+    &.cs-darker {
+        .base-scheme(@darkerColor);
+    }
+    &.cs-dark {
+        .base-scheme(@darkColor);
+    }
+    &.cs-base {
+        .base-scheme(@baseColor);
+    }
+    &.cs-mid {
+        .base-scheme(@midColor);
+    }
+    &.cs-lighter {
+        .base-scheme(@lighterColor);
+    }
+    &.cs-lightest {
+        .base-scheme(@lightestColor);
+    }
+
+//    &.cs-darker-invert {
+//        .invert-scheme(@darkerColor);
+//    }
+    &.cs-dark-invert {
+        .invert-scheme(@darkColor);
+    }
+    &.cs-base-invert {
+        .invert-scheme(@baseColor);
+    }
+//    &.cs-mid-invert {
+//        .invert-scheme(@midColor);
+//    }
+    &.cs-lighter-invert {
+        .invert-scheme(@lighterColor);
+    }
+    &.cs-lightest-invert {
+        .invert-scheme(@lightestColor);
+    }
+
+    // :hover is only applied on desktop (==not touch) so that IOS doesn't look bad (with hover in the wrong place)
+    // If we are invert-on-highlight and a parent hover target is hovered or hilighted, use the inverted scheme
+    .cs-hover-target.ng-click-active &,
+    &.cs-hover-target.ng-click-active,
+    .desktop .cs-hover-target:hover &,
+    .desktop &.cs-hover-target:hover,
+    .cs-highlight &,
+    &.cs-highlight {
+        &.cs-highlight-darker {
+            .base-scheme(@darkerColor);
+        }
+        &.cs-highlight-dark {
+            .base-scheme(@darkColor);
+        }
+        &.cs-highlight-base {
+            .base-scheme(@baseColor);
+        }
+//        &.cs-highlight-mid {
+//            .base-scheme(@midColor);
+//        }
+        &.cs-highlight-lighter {
+            .base-scheme(@lighterColor);
+        }
+//        &.cs-highlight-lightest {
+//            .base-scheme(@lightestColor);
+//        }
+
+//        &.cs-highlight-darker-invert {
+//            .invert-scheme(@darkerColor);
+//        }
+        &.cs-highlight-dark-invert {
+            .invert-scheme(@darkColor);
+        }
+        &.cs-highlight-base-invert {
+            .invert-scheme(@baseColor);
+        }
+//        &.cs-highlight-mid-invert {
+//            .invert-scheme(@midColor);
+//        }
+        &.cs-highlight-lighter-invert {
+            .invert-scheme(@lighterColor);
+        }
+        &.cs-highlight-lightest-invert {
+            .invert-scheme(@lightestColor);
+        }
+    }
+
+    &.disabled {
+        background-color: rgba(red(@baseColor), green(@baseColor), blue(@baseColor), 0.3);
+    }
+
+    background-size: cover;
+    background-position: center, center;
+
+    // nice looking webkit scrollbars
+    .desktop &::-webkit-scrollbar {
+        width: 6px;
+    }
+    .desktop &::-webkit-scrollbar-track {
+        background-color: @darken;
+    }
+    .desktop &::-webkit-scrollbar-thumb {
+        background-color: @lighterColor;
+    }
+    .desktop &::-webkit-scrollbar-button {
+        display: none;
+    }
+    .desktop &::-webkit-scrollbar-corner {
+        display: none;
+    }
+}
+
+// Add the base Turbulenz style
+.turbulenz-scheme {.color-scheme(@gadotme-base-color); }
+

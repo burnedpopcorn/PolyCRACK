@@ -1,0 +1,447 @@
+@import "mixins";
+@import "colors";
+@import "constants";
+@import "animations";
+
+
+// Bootstrap overrides
+.modal-backdrop {
+    .stretch-fill;
+    .chrome-layer-hint;
+    position: absolute;
+
+    .display-flex;
+    .flex-align-items(center);
+    .flex-justify-content(center);
+
+    background-color: @modal-backdrop;
+
+
+    &.in-stack {
+        background-color: transparent;
+    }
+
+    &.in-stack-add {
+        .transition( background-color @animation-land @animation-speed-fast);
+        &.in-stack-add-active {
+            background-color: transparent;
+        }
+    }
+    &.in-stack-remove {
+        .transition( background-color @animation-launch @animation-speed-fast);
+        &.in-stack-remove-active {
+            background-color: @modal-backdrop;
+        }
+    }
+
+    // Fade for backdrop
+    &.ng-hide-remove {
+        .transition( background-color @animation-land @animation-speed-fast);
+        .display-flex-important;
+        background-color: transparent;
+        &.ng-hide-remove-active {
+            background-color: @modal-backdrop;
+        }
+    }
+    &.ng-hide-add {
+        .transition( background-color @animation-launch @animation-speed-fast);
+        .display-flex-important;
+        background-color: @modal-backdrop;
+        &.ng-hide-add-active {
+            background-color: transparent;
+        }
+    }
+}
+
+.modal {
+    .flex(0, 1, auto);
+    position: relative;
+
+    @media (max-width: @fullscreen-width)
+    {
+        width: 100%;
+    }
+
+    width: @panel-size;
+    max-height: 100%;
+    overflow: auto;
+
+    z-index: 550;
+    background-color: @tz-white;
+    font-size: @medium-font-size;
+    opacity: 1;
+    box-shadow: 0 0 100px @dark-shadow;
+
+    .ng-hide-remove > &{
+        // This delay is important for the animation to be correct on chrome and fast on chrome android
+        .transition( all @animation-land @animation-speed-fast 0.01s);
+        .translate3d(0, -100%, 0);
+        opacity: 0;
+        .ng-hide-remove-active& {
+            opacity: 1;
+            .translate3d(0, 0, 0);
+        }
+    }
+
+    .ng-hide-add > &{
+        // This delay is important for the animation to be correct on chrome and fast on chrome android
+        .transition( all @animation-launch @animation-speed-fast 0.01s);
+        opacity: 1;
+        .translate3d(0, 0, 0);
+        .ng-hide-add-active& {
+            opacity: 0;
+            .translate3d(0, 100%, 0);
+        }
+    }
+
+    .basket-modal & {
+        width: 408px;
+    }
+}
+
+.full-height-modal, .itemmodal-frame.fullheight .modal {
+    height: 100%;
+}
+
+.modal-headers {
+    letter-spacing: 1px;
+    font-size: @style16-font-size;
+
+    line-height: @block-size;
+    height: @block-size;
+    overflow: hidden;
+
+    color: @tz-white;
+    text-transform: uppercase;
+}
+
+.modal-tab {
+    font-size: @style18-font-size;
+    .button-like;
+
+    display: inline-block;
+
+    padding-left: @large-gap;
+    padding-right: @large-gap;
+    line-height: @block-size;
+    height: @block-size;
+
+    &.cs-base.disabled {
+        color: grey;
+        cursor: default;
+    }
+}
+
+.modal-title {
+    font-size: @style20-font-size;
+    display: block;
+    text-align: center;
+}
+
+.modal-header-title {
+    font-size: @style20-font-size;
+    .one-pixel-letter-spacing;
+    height: @block-size;
+    line-height: @block-size;
+    text-align: center;
+}
+
+.modal-header-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: @block-size;
+}
+.modal-header-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: @block-size;
+}
+.modal-header-separator {
+    .separator;
+}
+.modal-header-icon {
+    .button-like;
+
+    display: inline-block;
+
+    height: @large-icon-size;
+    width: @icon-width;
+
+    line-height: @large-icon-size;
+    font-size: @large-icon-size;
+    vertical-align: middle;
+    text-align: center;
+
+    .ng-click-active, .desktop &:hover {
+        color: @style70-white;
+    }
+    width: @block-size;
+    height: @block-size;
+
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: @large-icon-size;
+        height: @large-icon-size;
+
+        position: relative;
+        top: (@block-size - @large-icon-size) / 2;
+
+        background-repeat: no-repeat;
+    }
+
+    &.icon-tz-nav-close {
+        &:after {
+            background-image: url('/img/modals/modal-close-icon.png');
+        }
+
+    }
+
+    &:hover {
+        &.icon-tz-nav-close {
+            &:after {
+                background-position-y: -@large-icon-size;
+            }
+
+        }
+    }
+
+}
+
+.modal-contents-noborder {
+    margin: @large-gap;
+}
+
+.modal-contents {
+    .modal-contents-noborder;
+    padding-bottom: @large-gap;
+    border-bottom: @thin-line solid #e6e6e6;
+}
+
+.modal {
+    input {
+        margin-top: @medium-gap;
+        padding: @modal-medium-space;
+        width: 100%;
+        height: (@block-size - @modal-medium-space);
+        border-radius: 0;
+        border: 0;
+        background-color: #e4e4e4;
+
+        &.ng-invalid-pattern
+        {
+            border: solid 1px red;
+        }
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        display: none;
+    }
+
+    input[type="checkbox"] + label, input[type="radio"] + label  {
+        .button-like;
+        & span {
+            color: @tz-black;
+            vertical-align: middle;
+        }
+    }
+
+    input[type="checkbox"] + label::before, input[type="radio"] + label::before {
+        display: inline-block;
+
+        width:  0.5 * @block-size;
+        margin-right: 0.25 * @block-size;
+
+        font-family: TzIconFont;
+        font-size: @style28-font-size;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    input[type="checkbox"] + label::before {
+        height: 0.5 * @block-size;
+        line-height: 1.2;
+        background-color: #e4e4e4;
+        content: " ";
+    }
+
+    input[type="checkbox"]:checked + label::before {
+        content: "\e622";
+    }
+
+    input[type="radio"] + label::before {
+        line-height: 0.7;
+        content: "\e625";
+    }
+
+    input[type="radio"]:not(:checked) + label::before {
+        color: @tz-l-grey;
+    }
+
+    input[type="radio"] + label {
+    font-size: @style18-font-size;
+    line-height: 1.25;
+    text-transform: none;
+    height: auto;
+    margin: 0;
+    &::before {
+        font-size: 11rem;
+        margin: 0 2.5rem 0 0;
+    }
+}
+
+    label {
+        font-size: @style16-font-size;
+        margin-top: @medium-gap;
+        text-transform: uppercase;
+        display: block;
+    }
+}
+
+.modal-footer {
+    .display-flex;
+    .flex-direction(row);
+    .flex-justify-content(space-between);
+    margin: @style20-gap;
+}
+
+.modal-cancel {
+    .flex(1, 1, 1px);
+    .modal-coloured-button(@tz-grey, white);
+}
+
+.modal-ok {
+    .flex(2, 2, 2px);
+    .modal-coloured-button(@button-blue, white);
+}
+
+.modal-text {
+    font-size: @style16-font-size;
+}
+
+.modal-section-header {
+    font-size: @style16-font-size;
+    .one-pixel-letter-spacing;
+    color: @tz-black;
+    padding-bottom: @style8-gap;
+}
+.modal-section-spacer {
+    background-color: @tz-l-grey;
+    height: @thin-line;
+    margin-top: @style20-gap;
+    margin-bottom: @style20-gap;
+
+    &.outer {
+        margin: 0 @style20-gap;
+    }
+}
+
+.modal-button {
+    font-size: @style16-font-size;
+    .one-pixel-letter-spacing;
+    .button-like;
+
+    position: relative;
+
+    height: @profile-button-size;
+
+    margin-right: @medium-gap;
+
+    vertical-align: middle;
+    line-height: @profile-button-size;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.modal-coloured-button(@colour, @highlight) {
+    .modal-button;
+
+    background-color: @colour;
+
+    &.ng-click-active, .desktop &:hover{
+        &not(:disabled) {
+            background-color: mix(@highlight, @colour, 30%);
+        }
+    }
+
+    &:disabled {
+        background-color: fade(@colour, 0.3);
+    }
+}
+
+.modal-social-button(@colour) {
+    .modal-coloured-button(@colour, white);
+
+    &[class^="icon-tz"], &[class*=" icon-tz"] {
+        padding-left: (4 * @base-unit);
+    }
+
+    &:before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-left: (4 * @base-unit);
+
+        font-size: 9 * @base-unit;
+    }
+}
+
+.modal-fb {
+    .flex(1, 1, auto);
+    .modal-social-button(@facebook-blue);
+}
+
+.modal-tw {
+    .flex(1, 1, auto);
+    .modal-social-button(@twitter-blue);
+}
+
+.modal-gg {
+    .flex(1, 1, auto);
+    .modal-social-button(@google-red);
+}
+
+.modal-tz {
+    .flex(1, 1, auto);
+    .modal-social-button(@gadotme-base-color);
+}
+
+
+
+
+
+@error-icon-size: 5 * @base-unit;
+.modal-error {
+    font-size: @style16-font-size;
+    margin-bottom: @style8-gap;
+    width: 100%;
+    color: @tz-red;
+}
+.modal-error-icon {
+    .button-like;
+    display: inline-block;
+    font-size: @style24-font-size;
+    line-height: @error-icon-size;
+    vertical-align: top;
+    text-align: center;
+    padding: 1rem;
+}
+.modal-error-text {
+    display: inline-block;
+    text-transform: uppercase;
+    vertical-align: top;
+    .calc-width('100% - 2 * @{error-icon-size}');
+    padding-top: 1rem;
+    padding-right: @style8-gap;
+    padding-bottom: 1rem;
+    padding-left: @style8-gap;
+}

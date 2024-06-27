@@ -1,0 +1,56 @@
+
+.avatar-large {
+    .img-circle;
+    border-width: @thick-border-width;
+    border-style: solid;
+    height: @avatar-large-height;
+    width: @avatar-large-height;
+    position: absolute;
+    left: @huge-gap;
+    top: @huge-gap;
+    display: block;
+    background-size: 100% 100%;
+}
+
+.avatar-small {
+    .img-circle;
+    border-width: @border-width;
+    border-style: solid;
+    height: @avatar-small-height;
+    min-width: @avatar-small-height;
+    display: inline-block;
+    background-size: 100% 100%;
+}
+
+.user-icon {
+    .avatar-small;
+    // NOTE: this is now done by using an icon from tzfont
+    // (but it needs more work to make it pixel perfect)
+    // Default for missing avatar image.
+    //background-image: url("static/resources/img/avatar-82.png");
+}
+
+
+
+.icon(@height)
+{
+    display: inline-block;
+
+    height: @height;
+    width: @icon-width;
+
+    line-height: @height;
+    font-size: @large-icon-size;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.icon-button(@height) {
+    .button-like;
+    .icon(@height);
+
+    .ng-click-active, .desktop &:hover {
+        color: @style70-white;
+    }
+}
+

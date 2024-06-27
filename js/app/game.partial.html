@@ -1,0 +1,19 @@
+<!--<div class="contents centered" ng-show="game && !game.playing">-->
+    <!--<div class="logo centered"></div>-->
+    <!--<div class="intro"> Secret Debug And Testing Menu! </div>-->
+    <!--<div class="debug-button centered" ng-click="play()">-->
+        <!--Play-->
+    <!--</div>-->
+    <!--<div class="debug-button centered" ng-click="logout()" ng-show="isOnline()">-->
+        <!--Logout (unauthorise first or you will be logged back in!)-->
+    <!--</div>-->
+    <!--<div class="debug-button centered" ng-click="clearLocalData()" ng-show="hasLocalData()">-->
+        <!--Clear locally stored game data and HTML cache-->
+    <!--</div>-->
+    <!--<div class="debug-button centered" ng-click="clearRemoteData()" ng-show="hasRemoteData">-->
+        <!--Clear remotely stored game data-->
+    <!--</div>-->
+<!--</div>-->
+<div class="game-container" ng-init="play()">
+    <game-canvas game="game"></game-canvas>
+</div>

@@ -1,0 +1,55 @@
+<div class="contents">
+    <div class="logo centered"></div>
+    <div class="login-container" ng-init="initialise()" ng-show="promptCreate">
+        <div>
+            <div class="intro centered">
+                Choose your ga.me username
+            </div>
+        </div>
+        <div class="error centered" ng-show="errorMessage">{{ errorMessage }}</div>
+        <input class="centered" ng-model="username"/>
+        <div class="debug-button centered" ng-class="{disabled: disablePlay}" ng-click="createAccount()">
+            Play as {{ username }}!
+        </div>
+        <div class="login-separator centered"></div>
+        <div class="centered">
+            <span class="hint" ng-click="showLinkInfo = true">
+                I already have a ga.me Account
+            </span>
+            or
+            <span class="hint" ng-click="play()">
+                play offline
+            </span>
+        </div>
+
+    </div>
+    <div ng-show="showLinkInfo" class="lightbox">
+        <div>
+            To sign in to this app using your ga.me account, make sure your ga.me email address is the same as
+            your Google account email address ({{email}}).
+        </div>
+        <div>
+            You can change it in Account Settings on <a href="{{ baseUrl }}" target="_blank">ga.me</a>
+        </div>
+    </div>
+    <div ng-show="showConnecting" class="lightbox">
+        <div>
+            Attempting to connect to ga.me
+        </div>
+        <div>
+            {{dots}}
+        </div>
+        <div>
+            Cancel and
+            <span class="hint" ng-click="play()">
+                play offline.
+            </span>
+        </div>
+    </div>
+    <div ng-show="showOffline" class="lightbox">
+        <div>
+            Not connected to ga.me. Your save game will be stored locally for this session.
+        </div>
+    </div>
+</div>
+

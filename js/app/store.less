@@ -1,0 +1,116 @@
+@import "overlay";
+
+
+@store-icon-size: @icon-size-48;
+
+@checkout-button-height: @profile-button-size;
+
+.store-checkout-button-area {
+    padding: @style16-gap;
+    background-color: @tz-l-grey;
+    // Keep in sync with store.js, storeSetScrollTop directive.
+    height: @checkout-button-height + 2 * @style16-gap;
+    border-bottom: solid @thin-line white;
+}
+.store-checkout-button
+{
+    .style-16-MD;
+    line-height: @checkout-button-height;
+    color: black;
+    cursor: pointer;
+    text-align: center;
+    height: @checkout-button-height;
+}
+
+.store-header {
+    .overlay-tab-header;
+}
+
+.store-scroll-area {
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.store-item-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.store-item {
+    position: relative;
+    background-color: @tz-white;
+    border-bottom: solid @thin-line @tz-l-grey;
+}
+
+.store-item-image {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: @style16-gap;
+    padding-bottom: @style16-gap;
+    padding-left: @style16-gap;
+    padding-right: @style12-gap;
+}
+
+.store-item-icon {
+    height: @store-icon-size;
+    width: @store-icon-size;
+}
+
+.store-item-details {
+    .style-16-LT;
+    line-height: @style16-font-size;
+    display: inline-block;
+    padding-top: @style16-gap;
+    max-width: (@overlay-width - (@store-icon-size + @style16-gap + @style12-gap) - (26 * @base-unit));
+}
+
+.store-item-description {
+    .style-16-LT;
+    padding-top: 2px;
+    padding-bottom: @style16-gap;
+    line-height: normal;
+}
+
+.store-buy-item-box {
+    position: absolute;
+    top: @style16-gap;
+    right: @style12-gap;
+    min-width: (19 * @base-unit);
+    height: @style48-gap;
+
+    .style-14-MD;
+    color: @tz-black;
+    background-color: @tz-l-grey;
+    padding-top: 1rem;
+}
+.store-buy-control {
+    cursor: pointer;
+}
+
+.store-buy-word {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.store-buy-price {
+    position: relative;
+    top: -50%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.store-bought {
+    .store-buy-item-box;
+    cursor: auto;
+}
+.store-bought-count {
+    .store-buy-word;
+}
+.store-bought-date {
+    .store-buy-price;
+}

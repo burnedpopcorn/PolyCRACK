@@ -1,0 +1,119 @@
+<div ng-controller="BasketController" tz-modal="show" on-before-close="onBeforeClose()" class="basket-modal desktop">
+    <div class="modal-header-title cs-base game-color-scheme">
+        {{paymentStatus === "Complete" ? "PURCHASE COMPLETE" : "BUY ITEMS"}}
+    </div>
+    <modal-close></modal-close>
+
+    <div ng-switch="paymentStatus">
+
+        <div ng-switch-when="InProgress" class="waiting-pane" >
+            <div class="waiting-spinner">
+                <img alt="processing" src="/img/payments/loader-white.gif" />
+            </div>
+            <div class="waiting-message">WAITING FOR PAYMENT COMPLETION</div>
+            <div class="waiting-details">Please checkout your purchase in the payment window</div>
+        </div>
+
+        <div ng-switch-default="">
+
+            <div ng-show="!basketItems.length" class="basket-empty">THE BASKET IS EMPTY
+                <div class="basket-empty-spacer"></div>
+            </div>
+
+            <ul class="basket-item-list">
+                <li ng-repeat="(key, item) in basketItems track by $id($index)">
+                    <div class="store-item">
+                        <div class="store-item-image">
+                            <img class="store-item-icon" external-src="{{ item.images.img48 || item.images.img256 }}"/>
+                        </div><!--
+                     --><div class="basket-item-details">
+                            <span ng-bind="item.title | uppercase" class="cs-base-invert game-color-scheme"></span>
+                            <div class="store-item-description">
+                                <span ng-bind="item.description"></span>
+                            </div>
+                        </div><!--
+                     --><div ng-switch="paymentStatus">
+                            <div ng-switch-when="NotStarted" class="store-buy-item-box store-buy-control cs-hover-target cs-highlight-dark game-color-scheme">
+                                <div ng-click="removeItem($index); $event.stopPropagation();"
+                                     class="store-remove-word cs-base-invert cs-no-bgcolor cs-highlight-base game-color-scheme">REMOVE</div>
+                                <div class="store-buy-price" ng-bind-html="trustAsHtml(item.displayPrice)"></div>
+                            </div>
+                            <div ng-switch-when="Failed" class="store-buy-item-box store-buy-control cs-hover-target cs-highlight-dark game-color-scheme">
+                                <div ng-click="removeItem($index); $event.stopPropagation();"
+                                     class="store-remove-word cs-base-invert cs-no-bgcolor cs-highlight-base game-color-scheme">REMOVE</div>
+                                <div class="store-buy-price" ng-bind-html="trustAsHtml(item.displayPrice);"></div>
+                            </div>
+                            <div ng-switch-when="Complete" class="store-buy-item-box">
+                                <div class="store-remove-word">1</div>
+                                <div class="store-buy-price" ng-bind-html="trustAsHtml(item.displayPrice)"></div>
+                            </div>
+                            <div ng-switch-default="" class="basket-price-progress" ng-bind-html="trustAsHtml(item.displayPrice)"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div ng-show="basketItems.length" class="basket-total">
+                <div class="basket-total-word">TOTAL</div>
+                <div class="basket-total-amount" ng-bind-html="trustAsHtml(totalPrice)"></div>
+            </div>
+
+
+            <div ng-switch="paymentStatus" class="payment-result">
+                <div ng-switch-default="">
+                </div>
+                <div ng-switch-when="Failed" class="result-failed">
+                    <div class="payment-result-icon">
+                        <i class="icon-tz-nav-close payment-failed-icon"></i>
+                    </div>
+                    <div class="result-text">PURCHASE FAILED</div>
+                </div>
+                <div ng-switch-when="Retrying" class="result-retrying">
+                    <div class="payment-result-icon">
+                        <i class="icon-tz-glyph-settings payment-retrying-icon cs-base game-color-scheme"></i>
+                    </div>
+                    <div class="result-text">WAITING FOR PURCHASE TO COMPLETE</div>
+                </div>
+                <div ng-switch-when="Complete" class="result-success">
+                    <div class="payment-result-icon">
+                        <i class="icon-tz-glyph-tick payment-successful-icon cs-base game-color-scheme"></i>
+                    </div>
+                    <div class="result-text">PURCHASE SUCCESSFUL</div>
+                </div>
+            </div>
+
+            <div class="basket-footer">
+
+                <div ng-show=" (paymentStatus !== 'Complete') &amp;&amp; (paymentStatus !== 'Retrying') &amp;&amp; !!basketItems.length">
+                    <form name="paymentProviders" class="select-payment-provider">
+                        <div ng-show="!!providers.paypal" class="payment-provider">
+                            <label for="pp-paypal" ng-click=" payment.provider='paypal' "><img src="/img/payments/payment-paypal.png"/></label><!--
+                            --><input id="pp-paypal" type="radio" name="pp" ng-model="payment.provider" ng-value=" 'paypal' "/>
+                        </div>
+                        <div ng-show="!!providers.amazon" class="payment-provider">
+                            <label for="pp-amazon" ng-click=" payment.provider='amazon' "><img src="/img/payments/payment-amazon.png"/></label><!--
+                            --><input id="pp-amazon" type="radio" name="pp" ng-model="payment.provider" ng-value=" 'amazon' "/>
+                        </div>
+                        <div ng-show="!!providers.googlewallet" class="payment-provider">
+                            <label for="pp-googlewallet" ng-click=" payment.provider='googlewallet' "><img src="/img/payments/payment-google.png"/></label><!--
+                            --><input id="pp-googlewallet" type="radio" name="pp" ng-model="payment.provider" ng-value=" 'googlewallet' "/>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="basket-checkout-button-area cs-base game-color-scheme">
+
+                    <div ng-hide="paymentStatus === 'Retrying' || paymentStatus === 'Complete' || !basketItems.length || !payment.provider"
+                        ng-click="buy(); $event.stopPropagation()"
+                         class="cs-base cs-highlight-lighter cs-hover-target game-color-scheme">PURCHASE WITH {{providerNames[payment.provider]}} ({{totalPrice}})</div>
+
+                    <div ng-show="paymentStatus === 'Retrying' || paymentStatus === 'Complete' || !basketItems.length || !payment.provider"
+                         ng-click="closeBasket(); $event.stopPropagation()"
+                         class="cs-base cs-highlight-lighter cs-hover-target game-color-scheme">BACK TO GAME {{ gameTitle }}</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

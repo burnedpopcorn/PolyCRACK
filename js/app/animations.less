@@ -1,0 +1,76 @@
+@import "constants";
+@import "mixins";
+
+.expand-block {
+    &.ng-hide-remove {
+        display: block !important;
+        overflow: hidden;
+        .transition(height @animation-land @animation-speed-fast);
+        height: 0;
+        &.ng-hide-remove-active {
+            height: @block-size;
+        }
+    }
+
+    &.ng-hide-add {
+        display: block !important;
+        overflow: hidden;
+        .transition(height @animation-launch @animation-speed-fast);
+        &.ng-hide-add-active {
+            height: 0;
+        }
+    }
+}
+
+
+.slide-block {
+    &.ng-hide-remove {
+        display: block !important;
+        .transition(top @animation-land @animation-speed-fast);
+        top: -@block-size;
+        &.ng-hide-remove-active {
+            top: 0;
+        }
+    }
+
+    &.ng-hide-add {
+        display: block !important;
+        .transition(top @animation-launch @animation-speed-fast);
+        &.ng-hide-add-active {
+            top: -@block-size;
+        }
+    }
+}
+
+.slide-contents {
+    &.ng-enter, &.ng-hide-remove {
+        display: block !important;
+        transition: all @animation-speed-fast @animation-land;
+        .translate(100%, 0);
+        z-index:1;
+        &.ng-enter-active, &.ng-hide-remove-active {
+            .translate(0, 0);
+        }
+    }
+
+    &.ng-leave, &.ng-hide-add {
+        display: block !important;
+        transition: all @animation-speed-fast @animation-land;
+        .translate(0, 0);
+        z-index:0;
+        &.ng-leave-active, &.ng-hide-add-active {
+            .translate(-100%, 0);
+        }
+    }
+}
+
+.rotate-75-frames {
+    75% { .transform(rotate(360deg)); }
+    100% { .transform(rotate(360deg)); }
+}
+
+@-webkit-keyframes rotate-75 { .rotate-75-frames }
+   @-moz-keyframes rotate-75 { .rotate-75-frames }
+    @-ms-keyframes rotate-75 { .rotate-75-frames }
+     @-o-keyframes rotate-75 { .rotate-75-frames }
+        @keyframes rotate-75 { .rotate-75-frames }

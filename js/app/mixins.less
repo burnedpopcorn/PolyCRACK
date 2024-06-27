@@ -1,0 +1,367 @@
+@import "../lib/bootstrap/less/normalize";
+@import "../lib/bootstrap/less/variables";
+@import "../lib/bootstrap/less/mixins";
+@import "../lib/bootstrap/less/scaffolding";
+@import "../lib/bootstrap/less/component-animations";
+@import "constants";
+@import "icons";
+@import "colors";
+
+
+.icon(@height)
+{
+    display: inline-block;
+
+    height: @height;
+    width: @icon-width;
+
+    line-height: @height;
+    font-size: @large-icon-size;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.icon-button(@height) {
+    .button-like;
+    .icon(@height);
+
+    .ng-click-active, .desktop &:hover {
+        color: @style70-white;
+    }
+}
+
+.separator
+{
+    display: inline-block;
+
+    height: @separator-height;
+    width: @separator-width;
+
+    vertical-align: middle;
+}
+
+
+/* Global mixins*/
+.horizontally-centered {
+    position: absolute;
+    left: 50%;
+    .translateX(-50%);
+}
+
+.centered {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .translate(-50%,-50%);
+}
+
+.chrome-layer-hint {
+    .translate3d(0,0,0);
+}
+
+.stretch-fill {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.calc-width(@width) {
+    width: ~"calc(@{width})";
+    width: ~"-webkit-calc(@{width})";
+}
+.calc-height(@height) {
+    height: ~"calc(@{height})";
+    height: ~"-webkit-calc(@{height})";
+}
+
+.animated-transition(@params) {
+    -webkit-transition: @params;
+    -moz-transition:    @params;
+    -o-transition:      @params;
+    transition:         @params;
+}
+
+.animated-transforms(@params) {
+    -webkit-transition: -webkit-transform @params;
+    -moz-transition:       -moz-transform @params;
+    -o-transition:           -o-transform @params;
+    transition:                 transform @params;
+}
+
+.animated-transforms(@params, @otherTransitions) {
+    -webkit-transition: -webkit-transform @params, @otherTransitions;
+    -moz-transition:       -moz-transform @params, @otherTransitions;
+    -o-transition:           -o-transform @params, @otherTransitions;
+    transition:                 transform @params, @otherTransitions;
+}
+
+.animated-transforms(@params, @otherTransitions, @otherTransitions2) {
+    -webkit-transition: -webkit-transform @params, @otherTransitions, @otherTransitions2;
+    -moz-transition:       -moz-transform @params, @otherTransitions, @otherTransitions2;
+    -o-transition:           -o-transform @params, @otherTransitions, @otherTransitions2;
+    transition:                 transform @params, @otherTransitions, @otherTransitions2;
+}
+
+.transform(@transforms) {
+  -webkit-transform: @transforms;
+     -moz-transform: @transforms;
+      -ms-transform: @transforms;
+       -o-transform: @transforms;
+          transform: @transforms;
+}
+
+.display-flex {
+    display: -ms-flexbox;
+
+    display: -webkit-box;
+    display: -moz-box;
+
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+}
+
+.display-flex-important {
+    display: -ms-flexbox !important;
+
+    display: -webkit-box !important;
+    display: -moz-box !important;
+
+    display: -webkit-flex !important;
+    display: -moz-flex !important;
+    display: flex !important;
+}
+
+.legacy-flex-direction(column) {
+    -webkit-box-orient: vertical;
+}
+
+.legacy-flex-direction(row) {
+    -webkit-box-orient: horizontal;
+}
+
+.flex-direction(@direction) {
+    .legacy-flex-direction(@direction);
+    -webkit-flex-direction: @direction;
+    -moz-flex-direction: @direction;
+    -ms-flex-direction: @direction;
+    flex-direction: @direction;
+}
+
+.legacy-flex-wrap(wrap) {
+    -webkit-box-lines: multiple;
+}
+
+.legacy-flex-wrap(nowrap) {
+    -webkit-box-lines: single;
+}
+
+.flex-wrap(@wrap) {
+    .legacy-flex-wrap(@wrap);
+    -webkit-flex-wrap: @wrap;
+    -moz-flex-wrap: @wrap;
+    -ms-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+
+.flex-flow(@direction) {
+    .flex-flow(@direction, nowrap);
+}
+
+.flex-flow(@direction, @wrap) {
+    .flex-direction(@direction);
+    .flex-wrap(@wrap);
+}
+
+.flex(@stretch, @shrink, @init) {
+    -webkit-box-flex: @stretch;
+    -webkit-flex: @stretch @shrink @init;
+    -moz-flex: @stretch @shrink @init;
+    -ms-flex: @stretch @shrink @init;
+    flex: @stretch @shrink @init;
+}
+
+.flex-grow(@number) {
+    -webkit-box-flex: @number;
+    -webkit-flex-grow: @number;
+    -moz-flex-grow: @number;
+    -ms-flex-grow: @number;
+    flex-grow: @number;
+}
+
+.legacy-flex-justify-content(space-around) {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+}
+
+.legacy-flex-justify-content(space-between) {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+}
+
+.legacy-flex-justify-content(center) {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+}
+
+.legacy-flex-justify-content(flex-end) {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+}
+
+.legacy-flex-justify-content(flex-start) {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+}
+
+.flex-justify-content(@justify) {
+    .legacy-flex-justify-content(@justify);
+    -webkit-justify-content: @justify;
+    -moz-justify-content: @justify;
+    -ms-justify-content: @justify;
+    justify-content: @justify;
+}
+
+.flex-align-items(@align) {
+    -webkit-box-align: @align;
+    -webkit-align-items: @align;
+    -moz-align-items: @align;
+    -ms-flex-align: @align;
+    align-items: @align;
+}
+
+.button-like {
+    .user-select(none);
+    cursor: pointer;
+}
+
+// Just to look better (Ben's design)
+.one-pixel-letter-spacing {
+    letter-spacing: 1px;
+}
+
+.medium-typeface {
+    font-family: "Avenir Next LT W01 Demi", Helvetica, Arial, sans-serif;
+}
+
+.light-typeface {
+    font-family: "AvenirNextLTW01-Regular", Helvetica, Arial, sans-serif;
+}
+
+.ultralight-typeface {
+    font-family: "Avenir Next W01 Light", Helvetica, Arial, sans-serif;
+}
+
+.style-11-MD {
+    .medium-typeface;
+    font-size: @style11-font-size;
+}
+.style-12-LT {
+    .light-typeface;
+    font-size: @style12-font-size;
+}
+.style-12-MD {
+    .medium-typeface;
+    font-size: @style12-font-size;
+}
+.style-14-LT {
+    .light-typeface;
+    font-size: @style14-font-size;
+    line-height: 1.25;
+}
+.style-14-MD {
+    .medium-typeface;
+    font-size: @style14-font-size;
+    line-height: 1.25;
+}
+.style-16-LT {
+    .light-typeface;
+    font-size: @style16-font-size;
+}
+.style-16-MD {
+    .medium-typeface;
+    font-size: @style16-font-size;
+}
+.style-18-LT {
+    .light-typeface;
+    font-size: @style18-font-size;
+    line-height: 1.25;
+}
+.style-18-MD {
+    .medium-typeface;
+    font-size: @style18-font-size;
+    line-height: 1.25;
+}
+.style-20-LT {
+    .light-typeface;
+    font-size: @style20-font-size;
+}
+.style-24-UL {
+    .ultralight-typeface;
+    font-size: @style24-font-size;
+}
+.style-20-MD {
+    .medium-typeface;
+    font-size: @style20-font-size;
+}
+.style-28-LT {
+    .light-typeface;
+    font-size: @style28-font-size;
+}
+.style-28-UL {
+    .ultralight-typeface;
+    font-size: @style28-font-size;
+}
+.style-38-UL {
+    .ultralight-typeface;
+    font-size: @style38-font-size;
+}
+
+.rigid {
+    .flex(0, 0, auto);
+}
+
+.stretcher {
+    // Can't squash in some older browsers and must have a non-zero height to stretch in IE
+    // so this instead of the ideal which would be "flex: 1 1 0"
+    .flex(1, 0, auto);
+}
+
+
+.bar-icon {
+    .icon-button(@block-size);
+    width: @block-size;
+    margin-top: @thin-line;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.input-common {
+    border-style: none;
+    width: 100%;
+    color: @tz-black;
+    background-color: @tz-l-grey;
+    border-style: none;
+    padding: @style12-gap;
+    resize: none;
+    overflow: hidden;
+    word-break: break-word;
+    word-wrap: break-word;
+
+    &:focus {
+        outline-style: none;
+        border-style: solid;
+        border-width: 1px;
+    }
+}
+
+.animation(@animation-props) {
+  -webkit-animation: @animation-props;
+     -moz-animation: @animation-props;
+      -ms-animation: @animation-props;
+       -o-animation: @animation-props;
+          animation: @animation-props;
+}

@@ -1,0 +1,10 @@
+<div class="contents">
+    <div class="logo centered"></div>
+    <div class="intro centered"> You have multiple saves. Which would you like to keep? </div>
+    <div class="debug-button centered" ng-click="keepServer()" ng-class="{'second-choice': server.totalXP < local.totalXP}">
+        Server ({{ server.hours }}.{{ server.minutes }} hours played, total XP earned {{ server.totalXP }} )
+    </div>
+    <div class="debug-button centered" ng-click="keepLocal()" ng-class="{'second-choice': local.totalXP <= server.totalXP}">
+        Local ({{ local.hours }}.{{ local.minutes }} hours played, total XP earned {{ local.totalXP }} )
+    </div>
+</div>

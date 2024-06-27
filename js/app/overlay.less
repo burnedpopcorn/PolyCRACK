@@ -1,0 +1,166 @@
+@import "constants";
+@import "mixins";
+
+
+@overlay-grey: #f5f5f5;
+@overlay-font-size-small: @small-font-size;
+@overlay-font-size-medium: @overlay-font-size-small * 7 / 6;
+@overlay-icon-size: @avatar-small-height;
+
+// Todo: remove this.
+@margin-width: 2rem;
+
+.overlay-header {
+    height: @overlay-header-height;
+}
+
+.overlay-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: @overlay-header-height;
+}
+
+.overlay-title {
+    .style-20-LT;
+    .one-pixel-letter-spacing;
+
+    display: inline-block;
+    position: absolute;
+
+    left: @block-size + 1rem;
+    right: @block-size + 1rem;
+    top: 0;
+
+    //width: 100%;
+    height: @block-size;
+    line-height: @block-size;
+
+    text-transform: uppercase;
+    text-align: center;
+
+    .text-overflow();
+
+    // Needed to allow the refresh button 'underneath' to work.
+    pointer-events: none;
+}
+
+.overlay-refresh-icon {
+    .icon-button(@nav-bar-height);
+}
+
+.overlay-close-icon {
+    .icon-button(@nav-bar-height);
+}
+
+.overlay-header-separator {
+    .separator;
+
+    background-color: @darken;
+}
+
+.overlay-separator {
+    .separator;
+
+    background-color: @darken;
+}
+
+.overlay-separator-selected {
+    height: @overlay-row-height;
+}
+
+.overlay-tabs {
+    padding: 0;
+}
+
+.overlay-tab-icon {
+    .icon-button(@overlay-row-height);
+    .calc-width('16.6% - @{separator-width}');
+}
+
+.overlay-content {
+    position: absolute;
+    top: @overlay-header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    overflow: hidden;
+
+    background-color: @tz-white;
+    font-size: @overlay-font-size-medium;
+}
+
+.overlay-item {
+    .stretch-fill;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.overlay-item.ng-enter
+{
+    transition: all @animation-speed-fast @animation-land;
+    .translate(100%, 0);
+    z-index:1;
+    &.ng-enter-active
+    {
+        .translate(0, 0);
+    }
+}
+
+.overlay-item.ng-leave
+{
+    transition: all @animation-speed-fast @animation-land;
+    .translate(0, 0);
+    z-index:0;
+    &.ng-leave-active
+    {
+        .translate(-100%, 0);
+    }
+}
+
+.overlay-tab-header {
+    .style-16-LT;
+    text-transform: uppercase;
+    height: @style34-font-size;
+    line-height: @style34-font-size;
+    background-color: @tz-l-grey;
+    color: black;
+    padding-left: @large-gap;
+}
+
+.overlay-info {
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.overlay-info-header {
+    .style-20-LT;
+    color: black;
+    background-color: @tz-l-grey;
+    width: 100%;
+    height: @overlay-row-height;
+    line-height: @overlay-row-height;
+    text-align: center;
+}
+.overlay-info-text {
+    .style-16-LT;
+    color: black;
+    padding: @style22-gap;
+    margin: 0;
+}
+
+.overlay-loading {
+    // for loader-white.gif
+    background-color: white;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
