@@ -16,7 +16,7 @@ After that, it should be installed and can be accessed by opening the App Drawer
 > ZIP is recommended, because CRX usually fails
 1. Download the CRX from the Releases Tab
 2. Do steps 3-4 from the ZIP instructions
-3. Open your Computer's File Manager (
+3. Open your Computer's File Manager
 > You still need to keep the ```chrome://extension``` tab open and on screen, even if only partially
 
 4. Drag and Drop the CRX file onto the ```chrome://extension``` tab
