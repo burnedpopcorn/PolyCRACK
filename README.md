@@ -13,6 +13,7 @@ A Re-Upload of PolyCraft 1.0.0.25
 After that, it should be installed and can be accessed by opening the App Drawer and Opening the PolyCraft App
 
 ## To Install Extension using the CRX
+> ZIP is recommended, because CRX usually fails
 1. Do steps 1-4
 2. Open your Computer's File Manager (
 > You still need to keep the ```chrome://extension``` tab open and on screen, even if only partially
